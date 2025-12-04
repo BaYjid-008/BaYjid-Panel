@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>XASS Bot Panel</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #0b0f17;
+        color: #e6e6e6;
+        display: flex;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        width: 80px;
+        background:#0f1322;
+        height:100vh;
+        padding-top:20px;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        gap:25px;
+        border-right:1px solid #1c2333;
+    }
+
+    .sidebar h2 {
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        color:#15d4ff;
+        font-weight:bold;
+        letter-spacing:2px;
+        margin-bottom:40px;
+    }
+    
+    .icon {
+        font-size:26px;
+        cursor:pointer;
+    }
+
+    /* Main content */
+    .content {
+        padding: 30px;
+        flex-grow: 1;
+    }
+
+    .box {
+        background:#101626;
+        padding:25px;
+        border-radius:12px;
+        margin-bottom:25px;
+        box-shadow:0 0 20px #00000050;
+    }
+
+    h3 {
+        color:#1ecbff;
+        margin-bottom:10px;
+    }
+
+    textarea {
+        width:100%;
+        height:140px;
+        background:#0c111d;
+        border:1px solid #243046;
+        padding:10px;
+        color:white;
+        border-radius:8px;
+        resize:none;
+    }
+
+    button {
+        width:100%;
+        margin-top:12px;
+        padding:12px;
+        border:none;
+        border-radius:8px;
+        background:linear-gradient(to right,#00c6ff,#0072ff);
+        color:#fff;
+        font-size:16px;
+        font-weight:bold;
+        cursor:pointer;
+    }
+
+    .status {
+        background:#0f1c11;
+        padding:12px;
+        border-radius:8px;
+        color:#89fca5;
+        font-weight:bold;
+        border:1px solid #1d3d28;
+    }
+
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <h2>XASS BOT 404</h2>
+    <div class="icon">🍪</div>
+    <div class="icon">📦</div>
+    <div class="icon">🗂️</div>
+    <div class="icon">⚙️</div>
+</div>
+
+<!-- Main Content -->
+<div class="content">
+    <div class="box">
+        <h3>🍪 Cookie Manager</h3>
+        <textarea id="cookie" placeholder="Paste your cookie here..."></textarea>
+        <button onclick="saveCookie()">Save Cookie</button>
+    </div>
+
+    <div class="box">
+        <h3>🤖 Bot Status</h3>
+        <div class="status" id="botStatus">✔ Bot is Running (PM2)</div>
+    </div>
+</div>
+
+<script>
+async function saveCookie() {
+    const cookie = document.getElementById("cookie").value;
+
+    const res = await fetch("https://malvina-bot-mvg1.onrender.com/save", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({ cookie })
+    });
+
+    alert(await res.text());
+}
+</script>
+
+</body>
+</html>
